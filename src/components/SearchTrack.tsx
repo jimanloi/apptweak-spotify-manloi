@@ -14,7 +14,10 @@ const SearchTrack = () => {
   const filteredResults = (query && data?.slice(0, 5)) || [];
 
   const handleSearch = () => {
-    setQuery(searchTerm);
+    setQuery("");
+    setTimeout(() => {
+      setQuery(searchTerm);
+    }, 0);
     setSearchTerm("");
   };
 
