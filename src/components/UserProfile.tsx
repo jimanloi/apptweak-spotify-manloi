@@ -1,5 +1,6 @@
 import { useGetUserQuery } from "../api/apiSlice";
 import spotifyIcon from "../assets/spotify-icon.svg";
+import userIcon from "../assets/default-user-image.svg";
 
 const UserProfile = () => {
   const { data: user } = useGetUserQuery(undefined);
@@ -12,7 +13,11 @@ const UserProfile = () => {
       </div>
       <div className="user-info">
         <div className="user-name">{user?.display_name}</div>
-        <img className="user-image" src={user?.images[0].url} alt={user?.type} />
+        <img
+          className="user-image"
+          src={user?.images?.length ? user.images[0].url : userIcon}
+          alt={user?.type}
+        />
       </div>
     </div>
   );
