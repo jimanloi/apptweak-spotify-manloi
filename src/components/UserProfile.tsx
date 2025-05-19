@@ -1,6 +1,6 @@
 import { useGetUserQuery } from "../api/apiSlice";
 import spotifyIcon from "../assets/spotify-icon.svg";
-import userIcon from "../assets/default-user-image.svg";
+import userIcon from "../assets/default-user-image.png";
 
 const UserProfile = () => {
   const { data: user } = useGetUserQuery(undefined);
