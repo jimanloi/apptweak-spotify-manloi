@@ -14,12 +14,7 @@ import {
 } from "@redux-saga/core/effects";
 
 import { selectAccessToken } from "./selectors";
-import {
-  getToken,
-  getTokenFailed,
-  getTokenSuccess,
-  login
-} from "./slice";
+import { getToken, getTokenFailed, getTokenSuccess, login } from "./slice";
 import {
   accessTokenStorageKey,
   base64encode,
