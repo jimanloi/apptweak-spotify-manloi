@@ -58,6 +58,8 @@
 
 .dropdown-menu {
   min-width: 50vw;
+  max-height: 55vh;
+  overflow-y: scroll;
   top: -10px;
 }
 

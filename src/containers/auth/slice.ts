@@ -1,6 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 
-import { ErrorPayload, RequestStatus } from "../../types/requests";
+import { RequestStatus } from "../../types/requests";
 
 export interface User {
   userId?: string;

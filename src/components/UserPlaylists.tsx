@@ -1,15 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useGetPlaylistsQuery } from "../api/apiSlice";
+import { RootState, AppDispatch } from "../store/store";
+import { setSelectedPlaylistId } from "../store/playlistSlice";
 import defaultPlaylistImage from "../assets/default-playlist-image.png";
 
-interface UserPlaylistsProps {
-  onSelectPlaylist: (playlistId: string) => void;
-  selectedPlaylistId: string | null;
-}
-
-const UserPlaylists = ({ onSelectPlaylist, selectedPlaylistId }: UserPlaylistsProps) => {
+const UserPlaylists = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const selectedPlaylistId = useSelector((state: RootState) => state.playlist.selectedPlaylistId);
   const { data } = useGetPlaylistsQuery(undefined);
 
-  const selectedPlaylist = data?.items?.find((p) => p.id === selectedPlaylistId);
+  const selectedPlaylist = selectedPlaylistId
+    ? data?.items?.find((p) => p.id === selectedPlaylistId)
+    : null;
 
   return (
     <div className="user-playlists">
@@ -28,7 +30,10 @@ const UserPlaylists = ({ onSelectPlaylist, selectedPlaylistId }: UserPlaylistsPr
           {data?.items?.length ? (
             data.items.map((item) => (
               <li key={item.id}>
-                <button className="dropdown-item" onClick={() => onSelectPlaylist(item.id)}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => dispatch(setSelectedPlaylistId(item.id))}
+                >
                   <img
                     src={item.images?.length ? item.images[0].url : defaultPlaylistImage}
                     alt={item.name}

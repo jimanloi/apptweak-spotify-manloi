@@ -1,11 +1,13 @@
 import { useGetPlaylistTracksQuery } from "../api/apiSlice";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
+import defaultImage from "../assets/default-playlist-image.png";
 
-interface PlaylistTracksProps {
-  playlistId: string;
-}
-
-const PlaylistTracks = ({ playlistId }: PlaylistTracksProps) => {
-  const { data: tracks } = useGetPlaylistTracksQuery(playlistId, { skip: !playlistId });
+const PlaylistTracks = () => {
+  const selectedPlaylistId = useSelector((state: RootState) => state.playlist.selectedPlaylistId);
+  const { data: tracks } = useGetPlaylistTracksQuery(selectedPlaylistId ?? "", {
+    skip: !selectedPlaylistId
+  });
 
   return (
     <div className="tracks">
@@ -20,7 +22,7 @@ const PlaylistTracks = ({ playlistId }: PlaylistTracksProps) => {
             {tracks.items.map((item) => (
               <div className="track-item" key={item.track.id}>
                 <img
-                  src={item.track.album.images[0].url}
+                  src={item.track.album.images[0].url || defaultImage}
                   alt={item.track.name}
                   className="track-item-image"
                 />
