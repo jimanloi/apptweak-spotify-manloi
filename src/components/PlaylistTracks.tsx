@@ -1,10 +1,10 @@
 import { useGetPlaylistTracksQuery } from "../api/apiSlice";
-import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import defaultImage from "../assets/default-playlist-image.png";
+import { selectPlaylist } from "../containers/playlist/selectors";
 
 const PlaylistTracks = () => {
-  const selectedPlaylistId = useSelector((state: RootState) => state.playlist.selectedPlaylistId);
+  const selectedPlaylistId = useSelector(selectPlaylist);
   const { data: tracks } = useGetPlaylistTracksQuery(selectedPlaylistId ?? "", {
     skip: !selectedPlaylistId
   });

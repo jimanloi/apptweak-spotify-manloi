@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useGetPlaylistsQuery } from "../api/apiSlice";
-import { RootState, AppDispatch } from "../store/store";
-import { setSelectedPlaylistId } from "../store/playlistSlice";
+import { AppDispatch } from "../store/store";
+import { setSelectedPlaylistId } from "../containers/playlist/slice";
 import defaultPlaylistImage from "../assets/default-playlist-image.png";
+import { selectPlaylist } from "../containers/playlist/selectors";
 
 const UserPlaylists = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const selectedPlaylistId = useSelector((state: RootState) => state.playlist.selectedPlaylistId);
+  const selectedPlaylistId = useSelector(selectPlaylist);
   const { data } = useGetPlaylistsQuery(undefined);
 
   const selectedPlaylist = selectedPlaylistId
