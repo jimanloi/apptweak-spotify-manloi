@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from "axios";
 import {
   call,
   put,
-  select,
   takeEvery,
   takeLatest,
   take,
@@ -13,7 +12,6 @@ import {
   delay
 } from "@redux-saga/core/effects";
 
-import { selectAccessToken } from "./selectors";
 import { getToken, getTokenFailed, getTokenSuccess, login } from "./slice";
 import {
   accessTokenStorageKey,
